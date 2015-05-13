@@ -81,7 +81,7 @@ for p = 1:numfreq
     
 h_stim=psd(spectrum.periodogram('hann'),Delta_in_center(Delta_in_center(1:stim_time(p),p,i,j)~=0,p,i,j),'Fs',Fs,'NFFT',NFFT);
 
-L = length(Delta_in_center(Delta_in_center(1:round(cycles/freq_stim(p)*1e4),p,i,j)~=0,p,i,j));
+L = length(Delta_in_center(Delta_in_center(1:stim_time(p),p,i,j)~=0,p,i,j));
 %{
 hfft  = fft(Delta_in_center(Delta_in_center(1:round(cycles/freq_stim(p)*1e4),p,i,j)~=0,p,i,j),NFFT)/L;
 qfft_Delta(:,2)=2*hfft(1:NFFT/2+1);
