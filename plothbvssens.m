@@ -99,7 +99,8 @@ sizeF = size(Fe_pulse{j,ind+1});
 for j = 1:pulseL
     for i = 1:sizeF(2)
         Fe_fft{j,i} = fft(Fe_pulse{j,ind+1}(:,1),NFFT)./XsegL; Fe_fft{j,i} = Fe_fft{j,i}(1:NFFT/2+1);
-        Fepk0(j,i) = find(abs(Fe_fft{j,i}) == max(abs(Fe_fft{j,i})));
+        Fepk00 = find(abs(Fe_fft{j,i}) == max(abs(Fe_fft{j,i})));
+        Fepk0(j,i) = Fepk00(1);
         Fepk(j,i) = Fe_fft{j,i}(Fepk0(j,i));
         freqstim(j,i) = f(Fepk0(j,i));
     end
