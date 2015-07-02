@@ -130,7 +130,7 @@ setfiguredefaults(sizeX(2));
 hrt(3) = figure(3);
 for j = 1:pulseL
     subplot(1,pulseL,j)
-    plot(mu,abs(sqrt(Xdpk(j,:))));title(num2str(j));
+    plot(mu,abs(sqrt(Xdpk(j,:)).*1e-9)./(abs(sqrt(Xopk(j,:))).*ksf.*1e-6.*1e-9) .* 1e-3);title(num2str(j));
     xlabel('Control parameter');ylabel('Xd');
     %set(3,'WindowStyle','docked')
 end
