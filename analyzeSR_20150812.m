@@ -1,7 +1,16 @@
 % input noise levels
-noiselevel = [0.01 0.5 0.75 1 1.5 2 0.9 3 5 6 7 8];
+
+noiselevel = [0.5 1 1.5 0.25 0.75 1.5 2 3 4 5 6 1 2 0.5 0.1 8 10 15];
+
+%noiselevel = [0 0.5 0.75 1 2 3 4 0.25 0.9 1.25 1.7];
+
+% input stimulus frequency
+freqs = 6; % hz
+
 sizeX = size(Xd_pulse);
 sizeX0 = size(Xd_pulse{1,raw(1)},2);
+
+% input stiffnesses
 ksf = [300 300 300 300 300];
 ksf = ksf.*1e-6;
 
@@ -22,7 +31,7 @@ m=1;
 for j = 1:length(raw)
 for k = 1:sizeX(1)
 for l = 1:sizeX0
-q=findnearest(fxx{j,k,l},10);
+q=findnearest(fxx{j,k,l},freqs);
 pow1(j,k,l) = max(pxx{j,k,l}(q-3:q+3));
 ampl(j,k,l) = sqrt(pow1(j,k,l));
 end
@@ -58,7 +67,7 @@ disp('3');
 for j = 1:length(raw)
 for k = 1:sizeX(1)
 for l = 1:sizeX0
-q=findnearest(fxx{j,k,l},10);
+q=findnearest(fxx{j,k,l},freqs);
 powf(j,k,l) = max(pxxf{j,k,l}(q));
 amplf(j,k,l) = sqrt(powf(j,k,l));
 end
@@ -113,7 +122,7 @@ close all;
 sizeS = size(sens,1);
 jj=[1:5];
 inds = 1:sizeS;
-inds = [4:sizeS-2 sizeS];
+inds = [1:sizeS sizeS];
 
 for k = 1:sizeX0
     
@@ -141,9 +150,9 @@ end
 close all;
 
 sizeS = size(sens,1);
-jj=[1:5];
+jj=[ 1 : 5];
 inds = 1:sizeS;
-inds = [5:sizeS];
+inds = [3 :sizeS];
 
 for k = 1:sizeX0
     subplot_tight(2,sizeX0,k);hold on;errorbar((noiselevel2(inds).^2)./2,abs(mean(sens(inds,jj,k),2))./sqrt(length(jj))./1e3,std(abs(sens(inds,jj,k))./sqrt(length(jj))./1e3,[],2),'k')
@@ -156,9 +165,9 @@ end
 close all
 
 indsanalyze = [1:5 ];
-jj= [3:5];
+jj= [1:5];
 inds = 1:sizeS;
-inds = [4:sizeS];
+inds = [1:sizeS];
 setfiguredefaults(length(indsanalyze));
 figure;
 for j = 1:length(indsanalyze)
