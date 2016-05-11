@@ -98,6 +98,7 @@ Xsinefft = fft(Xsine,NFFT)./XsegL; Xsinefft = Xsinefft(1:NFFT/2+1);
 winpeaknorm = sqrt(max(abs(Xsinefft)).*(2.*Fs.*XsegL.*(sum(abs(winfunc).^2)./XsegL)))./XsegL;
 
 % Calculate FFT for Fe
+j=1;
 sizeF = size(Fe_pulse{j,ind+1});
 for j = 1:pulseL
     for i = 1:sizeF(2)
